@@ -1,4 +1,3 @@
-// watchlist
 export const watchlist = [
   {
     name: "INFY",

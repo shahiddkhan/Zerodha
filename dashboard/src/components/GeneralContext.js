@@ -1,25 +1,25 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
+
 import BuyActionWindow from "./BuyActionWindow";
 
-// Create context with default empty functions
 const GeneralContext = React.createContext({
   openBuyWindow: (uid) => {},
   closeBuyWindow: () => {},
 });
 
-export const GeneralContextProvider = ({ children }) => {
+export const GeneralContextProvider = (props) => {
   const [isBuyWindowOpen, setIsBuyWindowOpen] = useState(false);
   const [selectedStockUID, setSelectedStockUID] = useState("");
 
-  const handleOpenBuyWindow = useCallback((uid) => {
+  const handleOpenBuyWindow = (uid) => {
     setIsBuyWindowOpen(true);
     setSelectedStockUID(uid);
-  }, []);
+  };
 
-  const handleCloseBuyWindow = useCallback(() => {
+  const handleCloseBuyWindow = () => {
     setIsBuyWindowOpen(false);
     setSelectedStockUID("");
-  }, []);
+  };
 
   return (
     <GeneralContext.Provider
@@ -28,10 +28,8 @@ export const GeneralContextProvider = ({ children }) => {
         closeBuyWindow: handleCloseBuyWindow,
       }}
     >
-      {children}
-      {isBuyWindowOpen && selectedStockUID && (
-        <BuyActionWindow uid={selectedStockUID} />
-      )}
+      {props.children}
+      {isBuyWindowOpen && <BuyActionWindow uid={selectedStockUID} />}
     </GeneralContext.Provider>
   );
 };
