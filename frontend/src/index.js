@@ -14,6 +14,9 @@ import NotFound from "./landing_page/NotFound";
 import Navbar from "./landing_page/Navbar";
 import Footer from "./landing_page/Footer";
 
+// ✅ Set backend base URL (change if deployed)
+export const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3002";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
